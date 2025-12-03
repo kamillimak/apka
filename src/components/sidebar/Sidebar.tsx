@@ -4,6 +4,7 @@ import Export from '../export/Export';
 import Subtitles from './Subtitles';
 import ClipActions from './ClipActions';
 import Transitions from './Transitions';
+import ColorCorrection from './ColorCorrection';
 
 const Sidebar: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const Sidebar: React.FC = () => {
         <Subtitles />
         <ClipActions />
         <Transitions />
+        <ColorCorrection />
       </div>
       <Export />
     </div>

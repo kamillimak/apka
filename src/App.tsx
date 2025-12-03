@@ -7,6 +7,7 @@ import { TimelineProvider } from './context/TimelineContext';
 import { PlaybackProvider } from './context/PlaybackContext';
 import { SubtitlesProvider } from './context/SubtitlesContext';
 import { SelectionProvider } from './context/SelectionContext';
+import { ColorCorrectionProvider } from './context/ColorCorrectionContext';
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
           <PlaybackProvider>
             <SubtitlesProvider>
               <SelectionProvider>
-                <Editor />
+                <ColorCorrectionProvider>
+                  <Editor />
+                </ColorCorrectionProvider>
               </SelectionProvider>
             </SubtitlesProvider>
           </PlaybackProvider>
