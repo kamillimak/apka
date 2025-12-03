@@ -6,6 +6,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TimelineProvider } from './context/TimelineContext';
 import { PlaybackProvider } from './context/PlaybackContext';
 import { SubtitlesProvider } from './context/SubtitlesContext';
+import { SelectionProvider } from './context/SelectionContext';
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
         <TimelineProvider>
           <PlaybackProvider>
             <SubtitlesProvider>
-              <Editor />
+              <SelectionProvider>
+                <Editor />
+              </SelectionProvider>
             </SubtitlesProvider>
           </PlaybackProvider>
         </TimelineProvider>

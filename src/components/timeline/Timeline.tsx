@@ -2,6 +2,7 @@ import React from 'react';
 import Track from './Track';
 import Playhead from './Playhead';
 import SubtitlesTrack from './SubtitlesTrack';
+import TransitionTrack from './TransitionTrack';
 
 const Timeline: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const Timeline: React.FC = () => {
       <div className="relative">
         <Playhead />
         <Track />
+        <TransitionTrack />
         <SubtitlesTrack />
       </div>
     </div>
