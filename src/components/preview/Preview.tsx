@@ -12,7 +12,7 @@ const Preview: React.FC = () => {
     throw new Error('Preview must be used within a PlaybackProvider and SubtitlesProvider');
   }
 
-  const { isPlaying, currentTime, play, pause, activeClip } = playbackContext;
+  const { currentTime, play, pause, activeClip } = playbackContext;
   const { subtitles } = subtitlesContext;
 
   React.useEffect(() => {

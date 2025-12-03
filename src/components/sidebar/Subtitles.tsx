@@ -32,21 +32,21 @@ const Subtitles: React.FC = () => {
           source.buffer = audioBuffer;
           const destination = audioContext.createMediaStreamDestination();
           source.connect(destination);
-          const mediaStream = destination.stream;
-          const mediaStreamTrack = mediaStream.getAudioTracks()[0];
-          const mediaStreamSource = audioContext.createMediaStreamSource(new MediaStream([mediaStreamTrack]));
           
-          recognition.onresult = (event) => {
-            const newSubtitles = Array.from(event.results).map((result, index) => ({
-              id: `sub-${index}`,
-              text: result[0].transcript,
-              startTime: result[0].timestamp ? result[0].timestamp / 1000 : 0,
-              endTime: result[0].timestamp ? result[0].timestamp / 1000 + 2 : 2, // Dummy endTime
-            }));
+          recognition.onresult = (event: SpeechRecognitionEvent) => {
+            const newSubtitles = Array.from(event.results).map((result) => {
+              const alternative = result[0] as SpeechRecognitionAlternative; // Cast to SpeechRecognitionAlternative
+              return {
+                id: crypto.randomUUID(),
+                text: alternative.transcript,
+                startTime: alternative.timestamp ? alternative.timestamp / 1000 : 0,
+                endTime: alternative.timestamp ? alternative.timestamp / 1000 + 2 : 2, // Dummy endTime
+              };
+            });
             addSubtitles(newSubtitles);
           };
 
-          recognition.onerror = (event) => {
+          recognition.onerror = (event: SpeechRecognitionError) => {
             console.error('Speech recognition error:', event.error);
             setIsGenerating(false);
           };
