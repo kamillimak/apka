@@ -1,6 +1,6 @@
 import React, { createContext, useState, ReactNode } from 'react';
 
-interface MediaFile {
+export interface MediaFile {
   id: string;
   name: string;
   url: string;

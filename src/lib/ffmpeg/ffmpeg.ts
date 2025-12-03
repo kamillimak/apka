@@ -25,5 +25,5 @@ export const processVideo: FFmpegProcess = async (
   await ffmpeg.writeFile(inputFile.name, await fetchFile(inputFile));
   await ffmpeg.exec(['-i', inputFile.name, ...opts, outputFileName]);
   const data = (await ffmpeg.readFile(outputFileName)) as Uint8Array;
-  return new File([data.buffer], outputFileName);
+  return new File([data.buffer as ArrayBuffer], outputFileName);
 };

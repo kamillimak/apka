@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Editor from './pages/Editor';
 import { MediaProvider } from './context/MediaContext';
 import { DndProvider } from 'react-dnd';

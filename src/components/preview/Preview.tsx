@@ -12,7 +12,7 @@ const Preview: React.FC = () => {
   }
 
   const { clips } = timelineContext;
-  const { isPlaying, currentTime, play, pause, seek } = playbackContext;
+  const { isPlaying, currentTime, play, pause } = playbackContext;
   const firstVideo = clips.find(clip => clip.type === 'video');
 
   useEffect(() => {

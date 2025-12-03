@@ -1,9 +1,9 @@
 import React, { useContext, useRef } from 'react';
 import { useDrag } from 'react-dnd';
-import { MediaContext } from '../../context/MediaContext';
+import { MediaContext, MediaFile } from '../../context/MediaContext';
 import { ItemTypes } from '../../types/types';
 
-const DraggableMediaFile = ({ file }) => {
+const DraggableMediaFile: React.FC<{ file: MediaFile }> = ({ file }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.CLIP,
     item: { id: file.id, name: file.name, url: file.url, type: file.type, duration: file.duration },
