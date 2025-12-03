@@ -1,6 +1,7 @@
 import React from 'react';
 import MediaPool from './MediaPool';
 import Export from '../export/Export';
+import Subtitles from './Subtitles';
 
 const Sidebar: React.FC = () => {
   return (
@@ -8,6 +9,7 @@ const Sidebar: React.FC = () => {
       <div>
         <h2 className="text-xl font-bold text-neon-green mb-4">Edit</h2>
         <MediaPool />
+        <Subtitles />
       </div>
       <Export />
     </div>

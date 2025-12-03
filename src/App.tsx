@@ -5,6 +5,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TimelineProvider } from './context/TimelineContext';
 import { PlaybackProvider } from './context/PlaybackContext';
+import { SubtitlesProvider } from './context/SubtitlesContext';
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
       <MediaProvider>
         <TimelineProvider>
           <PlaybackProvider>
-            <Editor />
+            <SubtitlesProvider>
+              <Editor />
+            </SubtitlesProvider>
           </PlaybackProvider>
         </TimelineProvider>
       </MediaProvider>
