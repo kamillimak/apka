@@ -1,54 +1,30 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { TimelineContext } from '../../context/TimelineContext';
-import { PlaybackContext } from '../../context/PlaybackContext';
+import React, { useContext, useState } from 'react';
 import { SubtitlesContext, Subtitle } from '../../context/SubtitlesContext';
+import { PlaybackContext } from '../../context/PlaybackContext';
+import PlaybackVideo from './PlaybackVideo';
 
 const Preview: React.FC = () => {
-  const timelineContext = useContext(TimelineContext);
   const playbackContext = useContext(PlaybackContext);
   const subtitlesContext = useContext(SubtitlesContext);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [currentSubtitle, setCurrentSubtitle] = useState<Subtitle | null>(null);
 
-  if (!timelineContext || !playbackContext || !subtitlesContext) {
-    throw new Error('Preview must be used within a TimelineProvider, PlaybackProvider, and SubtitlesProvider');
+  if (!playbackContext || !subtitlesContext) {
+    throw new Error('Preview must be used within a PlaybackProvider and SubtitlesProvider');
   }
 
-  const { clips } = timelineContext;
-  const { isPlaying, currentTime, play, pause } = playbackContext;
+  const { isPlaying, currentTime, play, pause, activeClip } = playbackContext;
   const { subtitles } = subtitlesContext;
-  const firstVideo = clips.find(clip => clip.type === 'video');
 
-  useEffect(() => {
-    if (firstVideo && videoRef.current) {
-      videoRef.current.src = firstVideo.url;
-    }
-  }, [firstVideo]);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.play();
-      } else {
-        videoRef.current.pause();
-      }
-    }
-  }, [isPlaying]);
-  
-  useEffect(() => {
-    if (videoRef.current && Math.abs(videoRef.current.currentTime - currentTime) > 0.1) {
-      videoRef.current.currentTime = currentTime;
-    }
-
+  React.useEffect(() => {
     const activeSubtitle = subtitles.find(sub => currentTime >= sub.startTime && currentTime <= sub.endTime);
     setCurrentSubtitle(activeSubtitle || null);
-
   }, [currentTime, subtitles]);
+
 
   return (
     <div className="w-full h-full bg-black flex flex-col items-center justify-center relative">
-      {firstVideo ? (
-        <video ref={videoRef} className="w-full h-full" />
+      {activeClip ? (
+        <PlaybackVideo />
       ) : (
         <p className="text-gray-500">Video Preview</p>
       )}
