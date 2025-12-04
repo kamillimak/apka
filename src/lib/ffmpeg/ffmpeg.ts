@@ -4,14 +4,18 @@ import { FFmpegProcess } from './types';
 
 let ffmpeg: FFmpeg | null = null;
 
+const CORE_URL = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.js';
+const WASM_URL = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.wasm';
+
+
 const loadFFmpeg = async (): Promise<FFmpeg> => {
-  if (ffmpeg) {
+  if (ffmpeg && ffmpeg.loaded) {
     return ffmpeg;
   }
   ffmpeg = new FFmpeg();
   await ffmpeg.load({
-    coreURL: '/node_modules/@ffmpeg/core/dist/esm/ffmpeg-core.js',
-    wasmURL: '/node_modules/@ffmpeg/core/dist/esm/ffmpeg-core.wasm',
+    coreURL: CORE_URL,
+    wasmURL: WASM_URL,
   });
   return ffmpeg;
 };
