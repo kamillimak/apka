@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { SelectionContext } from '../../context/SelectionContext';
 import { ColorCorrectionContext } from '../../context/ColorCorrectionContext';
 
